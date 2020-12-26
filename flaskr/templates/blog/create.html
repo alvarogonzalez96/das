@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}New Post{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-  <form method="post">
+  <form method="POST" enctype="multipart/form-data">
     <label for="title">Title</label>
     <input name="title" id="title" value="{{ request.form['title'] }}" required>
     <label for="address">Address</label>
     <input name="address" id="address" value="{{ request.form['address'] }}" required>
     <label for="size">Size</label>
     <input name="size" id="size" value="{{ request.form['size'] }}" required>
+    <input type="file" name="image" id="image">
+    <label class="custom-file-label" for="image">Select image...</label>
     <label for="body">Body</label>
     <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
     <input type="submit" value="Save">

@@ -14,7 +14,10 @@
       value="{{ request.form['address'] or post['address'] }}" required>
     <label for="size">Size</label>
     <input name="size" id="size"
-      value="{{ request.form['size'] or post['size'] }}" required>
+      value="{{ request.form['size'] or post['size'] }}" require>
+    <label class="custom-file-label" for="image">Image</label>
+    <input type="file" class="custom-file-input" name="image" id="image"
+      value="{{ request.form['image'] or post['image'] }}" require>
     <label for="body">Body</label>
     <textarea name="body" id="body">{{ request.form['body'] or post['body'] }}</textarea>
     <input type="submit" value="Save">
