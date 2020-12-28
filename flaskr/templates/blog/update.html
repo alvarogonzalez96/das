@@ -9,17 +9,25 @@
     <label for="title">Title</label>
     <input name="title" id="title"
       value="{{ request.form['title'] or post['title'] }}" required>
+
+    <label for="url">URL</label>
+    <input name="url" id="url" value="{{ request.form['url'] }}" required>
+
     <label for="address">Address</label>
     <input name="address" id="address"
       value="{{ request.form['address'] or post['address'] }}" required>
+
     <label for="size">Size</label>
     <input name="size" id="size"
       value="{{ request.form['size'] or post['size'] }}" require>
+
     <label class="custom-file-label" for="image">Image</label>
     <input type="file" class="custom-file-input" name="image" id="image"
       value="{{ request.form['image'] or post['image'] }}" require>
+
     <label for="body">Body</label>
     <textarea name="body" id="body">{{ request.form['body'] or post['body'] }}</textarea>
+
     <input type="submit" value="Save">
   </form>
   <hr>

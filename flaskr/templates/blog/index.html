@@ -20,7 +20,7 @@
           <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
         {% endif %}
       </header>
-      <p class="body">{{ post['body'] }}</p>
+      <a href="{{ post['url']}}" target="blank">Buy Here!</a>
  
       <img src="{{ url_for('blog.get_file', filename=post['image']) }}" id="post-img">
     </article>

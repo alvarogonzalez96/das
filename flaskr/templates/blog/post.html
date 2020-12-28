@@ -9,6 +9,8 @@
  <p>Size: {{ request.form['size'] or post['size'] }}</p>
  <p>General description: {{ request.form['body'] or post['body'] }}</p>
 
+ <a href="{{ post['url']}}" target="blank">Buy here!</a>
+
  <img src="{{ url_for('blog.get_file', filename=post['image']) }}" id="post-img">
 
 

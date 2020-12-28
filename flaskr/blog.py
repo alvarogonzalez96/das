@@ -49,6 +49,7 @@ def create():
         body = request.form['body']
         address = request.form['address']
         size = request.form['size']
+        url = request.form['url']
         image = request.files['image']
        
         error = None
@@ -61,6 +62,8 @@ def create():
         	error = 'Size is required'
         elif not image:
             error = 'Image is required'
+        elif not url:
+            error = 'URL is required'
 
         if error is not None:
             flash(error)
@@ -70,9 +73,9 @@ def create():
                 image.save(os.path.join(current_app.config["UPLOAD_FOLDER"], filename))
             db = get_db()
             db.execute(
-                'INSERT INTO post (title, body, author_id, address, size, image)'
-                ' VALUES (?, ?, ?, ?, ?, ?)',
-                (title, body, g.user['id'], address, size, filename)
+                'INSERT INTO post (title, body, author_id, address, size, url, image)'
+                ' VALUES (?, ?, ?, ?, ?, ?, ?)',
+                (title, body, g.user['id'], address, size, url, filename)
             )
             db.commit()
             return redirect(url_for('blog.index'))
@@ -85,7 +88,7 @@ def get_file(filename):
 
 def get_post(id, check_author=True):
     post = get_db().execute(
-        'SELECT p.id, title, body, created, author_id, username, address, size, image'
+        'SELECT p.id, title, body, created, author_id, username, address, size, url, image'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' WHERE p.id = ?',
         (id,)
@@ -109,6 +112,7 @@ def update(id):
         body = request.form['body']
         address = request.form['address']
         size = request.form['size']
+        url = request.form['url']
         image = request.form['image']
         error = None
 
@@ -117,16 +121,20 @@ def update(id):
         elif not address:
         	error = 'Address is required'
         elif not size:
-        	error = 'Size ir required'
+        	error = 'Size is required'
+        elif not url:
+            error = 'URL is required'
+        elif not image:
+            error = 'Image is required'
 
         if error is not None:
             flash(error)
         else:
             db = get_db()
             db.execute(
-                'UPDATE post SET title = ?, body = ?, address = ?, size = ?'
+                'UPDATE post SET title = ?, body = ?, address = ?, size = ?, url = ?, image = ?'
                 ' WHERE id = ?',
-                (title, body, id, address, size)
+                (title, body, id, address, size, url, image)
             )
             db.commit()
             return redirect(url_for('blog.index'))
