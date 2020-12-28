@@ -134,7 +134,7 @@ def update(id):
             db.execute(
                 'UPDATE post SET title = ?, body = ?, address = ?, size = ?, price = ?, url = ?, image = ?'
                 ' WHERE id = ?',
-                (title, body, id, address, size, price, url, image)
+                (title, body, address, size, price, url, image, id)
             )
             db.commit()
             return redirect(url_for('blog.index'))
