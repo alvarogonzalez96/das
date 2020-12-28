@@ -5,9 +5,11 @@
 
 {% block content %}
  <p>{{ request.form['title'] or post['title'] }}</p>
- <p>{{request.form['image'] or post['image']}}</p>
+ <p>Address: {{ request.form['address'] or post['address'] }}</p>
+ <p>Size: {{ request.form['size'] or post['size'] }}</p>
+ <p>General description: {{ request.form['body'] or post['body'] }}</p>
 
- <img src="{{ url_for('static', filename="/images/"+"shoe_1.jpg")}}" id="home-image1">
- <img src= "{{ url_for('static', filename="/images/"+"{{request.form['image'] or post['image']}}")}}" id="home-image2">
+ <img src="{{ url_for('blog.get_file', filename=post['image']) }}" id="post-img">
+
 
 {% endblock %}
