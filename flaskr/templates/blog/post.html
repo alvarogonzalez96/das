@@ -8,6 +8,7 @@
  <p>Address: {{ request.form['address'] or post['address'] }}</p>
  <p>Size: {{ request.form['size'] or post['size'] }}</p>
  <p>General description: {{ request.form['body'] or post['body'] }}</p>
+ <p>Price: {{ request.form['price'] or post['price'] }} €</p>
 
  <a href="{{ post['url']}}" target="blank">Buy here!</a>
 

@@ -15,19 +15,13 @@ bp = Blueprint('blog', __name__)
 
 @bp.route('/')
 def home():
-    db = get_db()
-    posts = db.execute(
-        'SELECT p.id, title, body, created, author_id, username, address, size'
-        ' FROM post p JOIN user u ON p.author_id = u.id'
-        ' ORDER BY created DESC'
-    ).fetchall()
-    return render_template('blog/home.html', posts=posts)
+    return render_template('blog/home.html')
 
 @bp.route('/index')
 def index():
     db = get_db()
     posts = db.execute(
-        'SELECT p.id, title, body, created, author_id, username, address, size, image'
+        'SELECT p.id, title, body, created, author_id, username, address, size, price, url, image'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' ORDER BY created DESC'
     ).fetchall()
@@ -50,6 +44,7 @@ def create():
         address = request.form['address']
         size = request.form['size']
         url = request.form['url']
+        price = request.form['price']
         image = request.files['image']
        
         error = None
@@ -64,6 +59,8 @@ def create():
             error = 'Image is required'
         elif not url:
             error = 'URL is required'
+        elif not price: 
+            error = 'Price is required'
 
         if error is not None:
             flash(error)
@@ -73,9 +70,9 @@ def create():
                 image.save(os.path.join(current_app.config["UPLOAD_FOLDER"], filename))
             db = get_db()
             db.execute(
-                'INSERT INTO post (title, body, author_id, address, size, url, image)'
-                ' VALUES (?, ?, ?, ?, ?, ?, ?)',
-                (title, body, g.user['id'], address, size, url, filename)
+                'INSERT INTO post (title, body, author_id, address, size, price, url, image)'
+                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                (title, body, g.user['id'], address, size, price, url, filename)
             )
             db.commit()
             return redirect(url_for('blog.index'))
@@ -88,7 +85,7 @@ def get_file(filename):
 
 def get_post(id, check_author=True):
     post = get_db().execute(
-        'SELECT p.id, title, body, created, author_id, username, address, size, url, image'
+        'SELECT p.id, title, body, created, author_id, username, address, size, price, url, image'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' WHERE p.id = ?',
         (id,)
@@ -112,6 +109,7 @@ def update(id):
         body = request.form['body']
         address = request.form['address']
         size = request.form['size']
+        price = request.form['price']
         url = request.form['url']
         image = request.form['image']
         error = None
@@ -126,15 +124,17 @@ def update(id):
             error = 'URL is required'
         elif not image:
             error = 'Image is required'
+        elif not price:
+            error = 'Price is required'
 
         if error is not None:
             flash(error)
         else:
             db = get_db()
             db.execute(
-                'UPDATE post SET title = ?, body = ?, address = ?, size = ?, url = ?, image = ?'
+                'UPDATE post SET title = ?, body = ?, address = ?, size = ?, price = ?, url = ?, image = ?'
                 ' WHERE id = ?',
-                (title, body, id, address, size, url, image)
+                (title, body, id, address, size, price, url, image)
             )
             db.commit()
             return redirect(url_for('blog.index'))
