@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  {% if g.user %}
+    <a class="action" href="{{ url_for('blog.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<body>
+  <h2>Who we are?</h2>
+  <h4>Compare is a website where you can upload the sneakers that you have available in your shop so anyone interested in them can go and visit your shop.</h4>
+
+  <h2>Contact us</h2>
+  <h4>Phone: +66 666 666 666</h4>
+  <h4>Email:
+  	<a href="mailto: alvaro.gonzalez96@opendeusto.es">Send Email
+  	</a>
+  </h4>
+  <h4>Facebook: 
+  	<a href="http://www.facebook.com" target="blank">Facebook</a>
+  </h4>
+  <h4>Twitter: 
+	<a href="http://www.twitter.com" target="blank">Twitter</a>
+  </h4>
+  <h4>Instagram:
+	<a href="http://www.instagram.com" target="blank">Instagram</a>
+  </h4>
+  
+  <h2>Office</h2>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2905.205650124033!2d-2.940933484138242!3d43.26806728526625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd31ce9bcfb73899%3A0xee02d528d71cbeb8!2sTorre%20Iberdrola!5e0!3m2!1ses!2ses!4v1609159757684!5m2!1ses!2ses" width="60%" height="400" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+</body>
+
+{% endblock %}

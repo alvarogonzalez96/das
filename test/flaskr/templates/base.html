@@ -1,0 +1,68 @@
+<!doctype html>
+<title>{% block title %}{% endblock %} - Flaskr</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+
+<nav>
+  <h1>
+    <a href="{{ url_for('blog.home') }}">Compare</a>
+  </h1>
+  <ul>
+    {% if g.user %}
+      <li><span>{{ g.user['username'] }}</span>
+      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+    {% else %}
+      <li><a href="{{ url_for('auth.register') }}">Register</a>
+      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+    {% endif %}
+  </ul>
+</nav>
+<section class="content">
+  <header>
+       <h1>
+        <a href="{{ url_for('blog.home') }}">Home | </a>
+        <a href="{{ url_for('blog.index') }}">Compare | </a>
+        <a href="{{ url_for('blog.about') }}">About Us</a>
+      </h1>
+      {% block header %}
+      {% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>
+<hr/>
+<footer>
+  <div class="main-content" id="container-footer">
+    
+    <div class="left-box" id="left-box">
+      <h4>Contact us:  <a href="mailto: alvaro.gonzalez96@opendeusto.es">Send Email </a></h4>
+    </div>
+
+    <div class="center-box" id="center-box">
+      <p>Phone: +66 666 666 666</p>
+       <span class="text">Developed by Deusto Univesity </span>
+    </div>
+
+    <div class="right-box" id="right-box"> 
+      <div>
+        <a href="https://www.twitter.com">
+        <img border="0" src="{{ url_for('static', filename="/images/twitter.png")}}" id="footer-logo" >
+        </a>
+      </div>
+     
+     <div>
+        <a href="https://www.instagram.com">
+          <img border="0" src="{{ url_for('static', filename="/images/instagram.png")}}" id="footer-logo" >
+        </a>
+     </div>
+      
+      <div>
+        <a href="https://www.facebook.com">
+        <img border="0" src="{{ url_for('static', filename="/images/facebook.png")}}" id="footer-logo" >
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
