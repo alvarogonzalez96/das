@@ -1,4 +1,3 @@
 flask
 pip
 werkzeug
-functools
