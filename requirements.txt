@@ -1,3 +1,5 @@
 flask
 werkzeug
+tokenize
+sys
 functools
