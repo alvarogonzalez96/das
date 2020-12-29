@@ -1,1 +1,1 @@
-web: flask run
+web: python3 __init__.py
