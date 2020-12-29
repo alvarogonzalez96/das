@@ -1,3 +1,5 @@
 flask
 pip
 werkzeug
+gunicorn
+python-decouple
