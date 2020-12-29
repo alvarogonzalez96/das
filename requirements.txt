@@ -1,5 +1,8 @@
-flask
-pip
-werkzeug
+Click
+Flask
+Jinja2
+itsdangerous
+MarkupSafe
+Werkzeug
 gunicorn
 python-decouple
