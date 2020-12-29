@@ -1,0 +1,4 @@
+flask
+sqlite
+werkzeug
+functools
