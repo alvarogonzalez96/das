@@ -1,4 +1,4 @@
-Click
+click
 Flask
 Jinja2
 itsdangerous

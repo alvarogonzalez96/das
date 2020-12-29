@@ -11,7 +11,7 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
     app.config.from_mapping(
-        SECRET_KEY='dev',
+        SECRET_KEY=b'\xa1\xbb\xaa\xbe\x15\xa2\x97\x8ccf\xdePsO"\xdc',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
 
